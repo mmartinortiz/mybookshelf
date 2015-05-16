@@ -1,4 +1,7 @@
+{% extends "base.html" %}
 {% load i18n %}
+
+{% block content %}
 
 <ul>
     <li><strong>{% trans "Name:" %}</strong> {{ author.name }}</li>
@@ -10,3 +13,4 @@
         <li><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></li>
     {% endfor %}
 </ul>
+{% endblock %}

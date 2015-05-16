@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
 {% if books %}
     <ul>
     {% for book in books %}
@@ -7,3 +11,4 @@
 {% else %}
     <p>{% trans "There are not books available" %}</p>
 {% endif %}
+{% endblock %}
