@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<ul>
+    <li><strong>{% trans "Name:" %}</strong> {{ author.name }}</li>
+</ul>
+
+<p>{% trans "Books written by" %} {{ author.get_nickname  }}</p>
+<ul>
+    {% for book in books %}
+        <li><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></li>
+    {% endfor %}
+</ul>
