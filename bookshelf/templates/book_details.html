@@ -2,10 +2,13 @@
 {% load i18n %}
 
 {% block content %}
-<ul>
-    <li><strong>{% trans "Tittle:" %}</strong> {{ book.title }}</li>
-    <li><strong>{% trans "Author:" %}</strong> <a href="{% url 'author_detail' book.author.id %}">{{ book.author }}</a></li>
-    <li><strong>{% trans "Year:" %}</strong> {{ book.year }}</li>
-    <li><strong>{% trans "Synopsis:" %}</strong> {{ book.synopsis }}</li>
-</ul>
+    <div class="row">
+        <div class="col-md-4"><img src="{{ book.image_url }}" class="img-responsive" alt="{{ book.title }}"></div>
+        <div class="col-md-8">
+            <h1>{{ book.title }}</h1>
+            <h6>{{ book.year }}</h6>
+            <h3><a href="{% url 'author_detail' book.author.id %}">{{ book.author }}</a></h3>
+            <p>{{ book.synopsis }}</p>
+        </div>
+    </div>
 {% endblock %}

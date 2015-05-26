@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from .forms import BookForm, AuthorForm
 from .models import Book, Author
 
 
@@ -20,3 +21,40 @@ def author_detail(request, author_id):
     # Get all the author's books
     books = author.book_set.all()
     return render(request, 'author_details.html', {'author': author, 'books': books})
+
+def authors_list(request):
+    authors = Author.objects.order_by('name')
+    return render(request, 'author_list.html', {'authors': authors})
+
+def new_book(request):
+    template = 'new_book.html'
+    data = {}
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            data['done'] = 'done'
+            # do something.
+    else:
+        form = BookForm()
+
+    data['form'] = form
+
+    return render(request, template, data)
+
+
+def new_author(request):
+    template = 'new_author.html'
+    data = {}
+    if request.method == 'POST':
+        form = AuthorForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            data['done'] = 'done'
+            # do something.
+    else:
+        form = AuthorForm
+
+    data['form'] = form
+
+    return render(request, template, data)

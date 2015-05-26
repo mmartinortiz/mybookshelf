@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+    <form action="{{ action }}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                {% if form.cover.value %}
+                    <img class="img-responsive" src="{{ MEDIA_URL }}{{ form.cover.value }}">
+                {% else %}
+                    <img class="img-responsive" src="{% static "images/default_bookcover.jpg" %}">
+                {% endif %}
+                {% bootstrap_field form.cover %}</div>
+            <div class="col-md-8">
+                <div>{% bootstrap_field form.title %}</div>
+                <div>{% bootstrap_field form.author %}</div>
+                <div>{% bootstrap_field form.year %}</div>
+                {% bootstrap_field form.synopsis %}
+            </div>
+        </div>
+        {% buttons %}
+            <input class="pull-right" type="submit" value="{% trans 'Save' %}"/>
+        {% endbuttons %}
+    </form>
+{% endblock %}

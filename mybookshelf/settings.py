@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'bootstrap3',
+    'crispy_forms',
     'bookshelf',
 )
 
@@ -110,3 +112,7 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+
+MEDIA_ROOT = os.path.join(os.getcwd(),'media')
+
+MEDIA_URL = '/media/'
