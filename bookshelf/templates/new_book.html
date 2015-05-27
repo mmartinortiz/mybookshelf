@@ -20,7 +20,15 @@
                 {% bootstrap_field form.cover %}</div>
             <div class="col-md-8">
                 <div>{% bootstrap_field form.title %}</div>
-                <div>{% bootstrap_field form.author %}</div>
+                <div class="row">
+                    <div class="col-md-9"><div>{% bootstrap_field form.author %}</div></div>
+                    <div class="col-md-1">
+                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
+  Simple collapsible
+</button>
+                    </div>
+                </div>
+                <div id="demo" class="collapse in">{% include "new_author_modal.html" %}</div>
                 <div>{% bootstrap_field form.year %}</div>
                 {% bootstrap_field form.synopsis %}
             </div>

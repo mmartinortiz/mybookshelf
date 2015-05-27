@@ -1,0 +1,10 @@
+{% load i18n %}
+{% load bootstrap3 %}
+
+<form action="{{ action }}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <input class="pull-right" type="submit" value="{% trans 'Save' %}"/>
+    {% endbuttons %}
+</form>
