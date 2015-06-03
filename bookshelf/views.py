@@ -26,7 +26,7 @@ def authors_list(request):
     authors = Author.objects.order_by('name')
     return render(request, 'author_list.html', {'authors': authors})
 
-def new_book(request):
+def new_book(request, id=None):
     template = 'new_book.html'
     data = {}
     if request.method == 'POST':

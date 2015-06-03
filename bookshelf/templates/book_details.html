@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col-md-4"><img src="{{ book.image_url }}" class="img-responsive" alt="{{ book.title }}"></div>
         <div class="col-md-8">
+            <div class="pull-right"><a class="btn btn-info btn-sm" href="{% url 'book_edit' book.id %}">{% trans 'Edit' %}</a></div>
             <h1>{{ book.title }}</h1>
             <h6>{{ book.year }}</h6>
             <h3><a href="{% url 'author_detail' book.author.id %}">{{ book.author }}</a></h3>

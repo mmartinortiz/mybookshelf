@@ -1,0 +1,12 @@
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{% url 'book_detail' book.id %}">
+                <img src="{{ book.image_url }}" class="img-thumbnail" alt="{{ book.title }}" width="150"></a>
+        </div>
+        <div class="col-md-8">
+            <h3><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></h3>
+            <h5>{{ book.author }}</h5>
+        </div>
+    </div>
+{% endblock %}

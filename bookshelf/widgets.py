@@ -43,7 +43,7 @@ except ImportError:
 class ImageWidget(forms.FileInput):
     template = '%(input)s<br />%(image)s'
 
-    def __init__(self, attrs=None, template=None, width=200, height=200):
+    def __init__(self, attrs=None, template=None, width=200, height=300):
         if template is not None:
             self.template = template
         self.width = width
@@ -94,6 +94,7 @@ class ClearableFileInput(forms.MultiWidget):
                                     'checkbox': rendered_widgets[1]}
         return rendered_widgets[0]
 
+
 root = lambda path: posixpath.join(settings.STATIC_URL, path)
 
 
@@ -101,6 +102,7 @@ class AutoResizeTextarea(forms.Textarea):
     """
     A Textarea widget that automatically resizes to accomodate its contents.
     """
+
     class Media:
         js = (JQUERY_URL,
               root('form_utils/js/jquery.autogrow.js'),
@@ -127,3 +129,67 @@ class InlineAutoResizeTextarea(AutoResizeTextarea):
         attrs.setdefault('cols', 40)
         attrs.setdefault('rows', 2)
         super(InlineAutoResizeTextarea, self).__init__(*args, **kwargs)
+
+#
+# class AddSelectWidget(forms.Widget):
+#     def __init__(self, attrs=None, choices=(), entity_name=None, is_aux=False, parent=None):
+#         super(AddSelectWidget, self).__init__(attrs)
+#
+#         self.choices = choices
+#         self.entity_name = entity_name
+#         self.is_aux = is_aux
+#         self.parent = parent
+#
+#     def value_from_datadict(self, data, files, name):
+#         value = super(AddSelectWidget, self).value_from_datadict(data, files, name)
+#         self.data = data
+#         return value
+#
+#     def render(self, name, value, attrs=None, choices=()):
+#         if not hasattr(self, 'data'):
+#             self.data = {}
+#         if value is None:
+#             value = ''
+#         final_attrs = self.build_attrs(attrs)
+#         output = [u"<select%s name='%s'>" % (flatatt(final_attrs), name)]
+#         options = self.render_options(choices, [value], name)
+#         if options:
+#             output.append(options)
+#         output.append('</select>')
+#         output.append(self.add_button_string() % {
+#             'url': self.generate_url(),
+#             'object_id': self.build_attrs(attrs)['id'],
+#             'entity': name,
+#         })
+#         return mark_safe(u'\n'.join(output))
+#
+#     def render_options(self, choices, selected_choices, name):
+#         selected_choices = set(force_unicode(v) for v in selected_choices)
+#         output = []
+#         for option_value, option_label in chain(self.choices, choices):
+#             if isinstance(option_label, (list, tuple)):
+#                 for option in option_label:
+#                     output.append(self.render_option(name, selected_choices, *option))
+#             else:
+#                 output.append(self.render_option(name, selected_choices, option_value, option_label))
+#         return u'\n'.join(output)
+#
+#     def render_option(self, name, selected_choices, option_value, option_label):
+#         option_value = force_unicode(option_value)
+#         data = self.data.copy()
+#         data[name] = option_value
+#         selected = data == self.data or option_value in selected_choices
+#         return self.option_string() % {
+#             'attrs': selected and ' selected="selected"' or '',
+#             'value': option_value,
+#             'label': force_unicode(option_label)
+#         }
+#
+#     def option_string(self):
+#         return '<option value="%(value)s" %(attrs)s>%(label)s</option>'
+#
+#     def add_button_string(self):
+#         return '<a class="btn-plus" onclick="launchAddButton(\'%(url)s\', \'%(object_id)s \', \'%(entity)s \')"><i class="icon-plus"></i></a>'
+#
+#     def generate_url(self):
+#         return '/app/widget/create/%s' % self.entity_name
