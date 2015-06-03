@@ -12,26 +12,21 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-md-4">
-                {% if form.cover.value %}
-                    <img class="img-responsive" src="{{ MEDIA_URL }}{{ form.cover.value }}">
-                {% else %}
-                    <img class="img-responsive" src="{% static "images/default_bookcover.jpg" %}">
-                {% endif %}
-                {% bootstrap_field form.cover %}</div>
-            <div class="col-md-8">
-                <div>{% bootstrap_field form.title %}</div>
-                <div class="row">
-                    <div class="col-md-9"><div>{% bootstrap_field form.author %}</div></div>
-                    <div class="col-md-1">
-                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
-  Simple collapsible
-</button>
-                    </div>
-                </div>
-                <div id="demo" class="collapse in">{% include "new_author_modal.html" %}</div>
-                <div>{% bootstrap_field form.year %}</div>
-                {% bootstrap_field form.synopsis %}
+                {{ form.cover }}
+{#            {% bootstrap_field form.cover %}#}
+{#                {% if form.cover.value %}#}
+{#                    <img class="img-responsive" src="{{ MEDIA_URL }}{{ form.cover.value }}">#}
+{#                {% else %}#}
+{#                    <img class="img-responsive" src="{% static "images/default_bookcover.jpg" %}">#}
+{#                {% endif %}#}
+{#                {% bootstrap_field form.cover %}#}
             </div>
+{#            <div class="col-md-8">#}
+{#                {% bootstrap_field form.title %}#}
+{#                {% bootstrap_field form.author %}#}
+{#                {% bootstrap_field form.year %}#}
+{#                {% bootstrap_field form.synopsis %}#}
+{#            </div>#}
         </div>
         {% buttons %}
             <input class="pull-right" type="submit" value="{% trans 'Save' %}"/>

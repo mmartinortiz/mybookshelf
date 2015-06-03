@@ -53,7 +53,7 @@ def new_author(request):
             data['done'] = 'done'
             # do something.
     else:
-        form = AuthorForm
+        form = AuthorForm()
 
     data['form'] = form
 
